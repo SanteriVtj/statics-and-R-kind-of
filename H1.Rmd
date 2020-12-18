@@ -2,4 +2,29 @@
 22*sqrt(30)/25
 pnorm(-abs(22*sqrt(30)/25))
 ```
+```{r}
+jul<-c(32.2, 27.4, 28.6, 32.4, 40.5, 26.2, 29.4, 25.8, 36.6, 30.3, 28.5, 32.0)
+jan<-c(30.5, 28.4, 40.2, 37.6, 36.5, 38.8, 34.7, 29.5, 29.7, 37.2, 41.5, 37.0)
+s_v<-((length(jul)-1)*var(jul)+(length(jan)-1)*var(jan))/(length(jan)+length(jul)-2)
+ts<-(mean(jul)-mean(jan))/sqrt(s_v*(1/length(jan)+1/length(jul)))
+2*pt(ts,df=22,lower.tail=TRUE)
+pt(22,0.025,lower.tail = TRUE)
+```
+```{r}
+w<-c(7,6,14,12,13,8,9,6,10,9)
+wo<-c(8,7,5,8,10,9,7,8,4,5)
+plot(seq(1,length(w),1),w,type='l', ylim=c(-2,15))
+lines(seq(1,length(wo),1),wo,type='l')
+
+d<-w-wo
+lines(seq(1,length(wo),1),d,type='l')
+
+ts_1<-sqrt(length(d))*mean(d)/sd(d)
+pt(ts_1,df=length(d)-1,lower.tail=FALSE)
+
+s_v_2<-((length(w)-1)*var(w)+(length(wo)-1)*var(wo))/(length(w)+length(wo)-2)
+
+ts_2<-(mean(w)-mean(wo))/sqrt(s_v*(1/length(w)+1/length(wo)))
+pt(ts_2,df=18,lower.tail=FALSE)
+```
 
