@@ -1,0 +1,46 @@
+```{r}
+m<-cbind(
+  c(5,13,8),
+  c(9,12,12),
+  c(12,20,16),
+  c(6,11,8)
+)
+rm<-rowMeans(m)
+sm<-mean(rowMeans(m))
+
+sv<-0
+for (i in rm) {
+  sv<-sv+(i-sm)^2
+}
+bs<-sv / (length(rm) - 1) * length(m[1,])
+
+ws<-0
+for (i in 1:nrow(m)){
+  ws<-ws + var(m[i,])
+}
+ws<-ws / length(m[,1])
+
+ts<-bs / ws
+ts
+
+1 - pf(ts, length(m[,1]) - 1, length(m[,1]) * (length(m[1,]) - 1))
+```
+```{r}
+m<-cbind(
+  c(20,20,28),
+  c(23,21,26),
+  c(18,17,23),
+  c(17,16,22)
+)
+
+rm<-rowMeans(m)
+cm<-colMeans(m)
+
+avg<-mean(m)
+
+rm<-rm - avg
+cm<-cm - avg
+
+sum
+```
+
