@@ -40,7 +40,49 @@ avg<-mean(m)
 
 rm<-rm - avg
 cm<-cm - avg
+```
+```{r}
+m<-cbind(
+  c(20,20,28),
+  c(23,21,26),
+  c(18,17,23),
+  c(17,16,22)
+)
 
-sum
+rm<-rowMeans(m)
+cm<-colMeans(m)
+avg<-mean(m)
+
+r_squared<-ncol(m) * sum((rm - avg)^2)
+c_squared<-nrow(m) * sum((cm - avg)^2)
+
+rm_squared<-matrix(0,nrow=nrow(m), ncol=ncol(m))
+for (i in 1:nrow(m)){
+  for (j in 1:ncol(m)) {
+    rm_squared[i,j]<-(m[i,j] - mean(m[i,]) - mean(m[,j]) + avg)^2
+  }
+}
+rm_squared<-sum(rm_squared)
+ts<-(r_squared / (nrow(m) - 1)) / (rm_squared / ((ncol(m) - 1) * (nrow(m) - 1)))
+1-pf(ts,(nrow(m) - 1),(ncol(m) - 1) * (nrow(m) - 1))
+
+ts2<-(c_squared / (ncol(m) - 1)) / (rm_squared / ((ncol(m) - 1) * (nrow(m) - 1)))
+1-pf(ts2,(ncol(m) - 1),(ncol(m) - 1) * (nrow(m) - 1))
+```
+```{r}
+m<-rbind(
+  c(15.6,16.4,17.2,15.5,16.3),
+  c(17.1,16.3,15.8,16.4,16),
+  c(15.9,17.2,16.4,15.4,16.8)
+)
+rm<-rowMeans(m)
+
+s_var<-sum((rm - mean(rm))^2 / (length(rm) - 1))
+
+ssum<-sum(rowVars(m)) / 3
+
+ts<-ncol(m) * s_var / ssum
+
+1 - pf(ts, length(m[,1]) - 1, length(m[,1]) * (length(m[1,]) - 1))
 ```
 
