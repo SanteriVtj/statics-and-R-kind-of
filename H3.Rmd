@@ -1,0 +1,22 @@
+```{r}
+k<-data.frame(
+  Pituus=c(183,160,196,186,195,182,208,169,166,198,145,168),
+  Palkka=c(100,92,106,92,109,101,116,96,94,101,93,96)
+)
+fit<-lm(formula=Palkka~Pituus, data=k)
+summary(fit)
+anova(fit)
+coefficients(fit)[1] + coefficients(fit)[2] * 179
+plot(k$Pituus, k$Palkka, col='red', pch=16)
+abline(fit)
+```
+```{r}
+beta<-sum(((k$Pituus - mean(k$Pituus)) * (k$Palkka - mean(k$Palkka)))) / sum(((k$Pituus - mean(k$Pituus)))^2)
+beta
+alpha<-mean(k$Palkka) - beta * mean(k$Pituus)
+alpha
+```
+```{r}
+
+```
+
