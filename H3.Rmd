@@ -17,6 +17,11 @@ alpha<-mean(k$Palkka) - beta * mean(k$Pituus)
 alpha
 ```
 ```{r}
-
+S_XY<-sum(k$Pituus * k$Palkka) - sum(nrow(k) * mean(k$Pituus) * mean(k$Palkka))
+S_XX<-sum(k$Pituus^2) - sum(nrow(k) * mean(k$Pituus)^2)
+S_YY<-sum(k$Palkka^2) - sum(nrow(k) * mean(k$Palkka)^2)
+SS_R<-sum((k$Palkka - alpha - beta * k$Pituus)^2)
+var_est<-((S_XX * S_YY - S_XY^2) / S_XX) / (nrow(k) - 2)
+var_est
 ```
 
