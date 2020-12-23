@@ -1,4 +1,35 @@
 ```{r}
+cig=data.frame(
+  cig_am=c(0,10,14,5,18,20,30,40),
+  free_rad=c(94,144,182,120,240,234,321,400)
+)
+
+#plot(cig$cig_am, cig$free_rad, ylim=c(0,300))
+
+S_XY=sum(cig$cig_am * cig$free_rad) - sum(nrow(cig) * mean(cig$cig_am) * mean(cig$free_rad))
+S_XX=sum(cig$cig_am^2) - sum(nrow(cig) * mean(cig$cig_am)^2)
+S_YY=sum((cig$free_rad - mean(cig$free_rad))^2)
+beta=S_XY / S_XX
+alpha=mean(cig$free_rad) - beta * mean(cig$cig_am)
+fit=lm(free_rad~cig_am, cig)
+
+x_0=beta * 26 + alpha
+
+SS_R=sum((cig$free_rad - alpha - beta * cig $cig_am)^2)
+W=sqrt((1 + 1 / nrow(cig) + (26 - mean(cig$cig_am))^2 / S_XX) * (SS_R / (nrow(cig) - 2)))
+c(x_0 - abs(qt(.025, nrow(cig) - 2)) * W, x_0 + abs(qt(.025, nrow(cig) - 2)) * W)
+```
+```{r}
+2 * pt(3.354678, 18, lower.tail=FALSE)
+W=(1.1 + (13.8-12.8)^2 / 36.5) * (16.08876 / 18)
+x_0=.66849 * 13.8 + 4.343328
+c(x_0 - abs(qt(.025, 18)) * W, x_0 + abs(qt(.025, 18)) * W)
+```
+```{r}
+li=data.frame(
+  valo=c(.44,.82,1.2,1.61,1.83),
+  proteiini=c(2,16,30,46,55)
+)
 
 ```
 
