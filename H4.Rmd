@@ -4,7 +4,7 @@ cig=data.frame(
   free_rad=c(94,144,182,120,240,234,321,400)
 )
 
-#plot(cig$cig_am, cig$free_rad, ylim=c(0,300))
+plot(cig$cig_am, cig$free_rad, ylim=c(0,300))
 
 S_XY=sum(cig$cig_am * cig$free_rad) - sum(nrow(cig) * mean(cig$cig_am) * mean(cig$free_rad))
 S_XX=sum(cig$cig_am^2) - sum(nrow(cig) * mean(cig$cig_am)^2)
@@ -30,6 +30,29 @@ li=data.frame(
   valo=c(.44,.82,1.2,1.61,1.83),
   proteiini=c(2,16,30,46,55)
 )
-
+S_YY=sum((li$proteiini - mean(li$proteiini))^2)
+S_XY=sum((li$valo - mean(li$valo))*(li$proteiini - mean(li$proteiini)))
+S_XX=sum((li$valo - mean(li$valo))^2)
+beta=S_XY / S_XX
+alpha=mean(li$proteiini) - beta * mean(li$valo)
+SS_R=(S_XX * S_YY - S_XY^2) / S_XX
+R_2=1-SS_R/S_YY
+x_0=alpha + beta * 1.5
+W=sqrt((1.1 + (1.5 - mean(li$valo))^2 / S_XX) * (SS_R/(nrow(li) - 2)))
+c(x_0 - abs(qt(.05, nrow(li) - 2)) * W, x_0 + abs(qt(.05, nrow(li) - 2)) * W)
+```
+```{r}
+df=data.frame(
+  x_1=c(1,2,1.5,3,1),
+  x_2=c(3,4,8,9,11),
+  x_3=c(5,4,2,3,4),
+  x_4=c(9,10,14,8,12),
+  y=c(121,165,150,170,140)
+)
+m=cbind(1,as.matrix(data.frame(df$x_1, df$x_2, df$x_3, df$x_4)))
+beta=solve(t(m) %*% m) %*% t(m) %*% as.matrix(df$y)
+beta
+sum(c(1,2,7,3,13) * c(t(beta)))
+summary(lm(y~x_1+x_2+x_3+x_4, df))
 ```
 
