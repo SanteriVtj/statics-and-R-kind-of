@@ -1,0 +1,45 @@
+```{r}
+pchisq(7,3,lower.tail=FALSE)
+```
+```{r}
+df=data.frame(
+  al=c(87,46),
+  yl=c(63,55)
+)
+rownames(df)=c('k','e')
+
+e=c()
+ts_s=c()
+for (i in rownames(df)) {
+  for (j in colnames(df)) {
+    e=c(e,sum(df[i,]) * sum(df[,j]) / sum(df))
+    ts_s=c(ts_s, (df[i,j] - e[length(e)])^2 / e[length(e)])
+  }
+}
+sum(ts_s)
+pchisq(sum(ts_s), 1, lower.tail=FALSE)
+```
+```{r}
+acc=data.frame(
+  t=c(35,79,57),
+  et=c(170,190,66)
+)
+rownames(acc)=c('0','1','<2')
+
+ts_s=c()
+for (i in rownames(acc)) {
+  for (j in colnames(acc)) {
+    e=c(e,sum(acc[i,]) * sum(acc[,j]) / sum(acc))
+    ts_s=c(ts_s, (acc[i,j] - e[length(e)])^2 / e[length(e)])
+  }
+}
+
+sum(ts_s)
+pchisq(sum(ts_s), 4, lower.tail=FALSE)
+```
+```{r}
+s=c(167,165,167,166,167,168)
+ts=sum(((1/6*1000) - s)^2 / s)
+pchisq(ts, 5, lower.tail=FALSE)
+```
+
