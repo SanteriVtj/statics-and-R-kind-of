@@ -1,0 +1,19 @@
+```{r}
+2*pbinom(35.5, 50, .5, lower.tail = FALSE)
+2*pbinom(9.5, 12, .5, lower.tail = FALSE)
+p=c()
+for (i in seq(6,12,.5)) {
+  p=c(p, 2*pbinom(i, 12, .5, lower.tail = FALSE))
+}
+plot(seq(6,12,.5), p)
+```
+```{r}
+2*pnorm(1.78, lower.tail=FALSE)
+```
+```{r}
+pchisq(3.28888, 3-1, lower.tail = FALSE)
+```
+```{r}
+pbinom(7,20,.5)
+```
+
