@@ -16,4 +16,33 @@ pchisq(3.28888, 3-1, lower.tail = FALSE)
 ```{r}
 pbinom(7,20,.5)
 ```
+```{r}
+plot(1:9, c(3,4,4,1,5,5,2,3,4))
+median(c(3,4,4,1,5,5,2,3,4))
+```
+```{r}
+ex=c(22, 24, 20, 18, 16, 14, 15, 15, 13, 17, 12, 14)
+
+#p_1=((length(ex) * (length(ex) +1) * (2 * length(ex) + 1)) / (6 * (length(ex) - 1)))
+#p_2=sum(ex^2) - (length(ex) * mean(ex)^2)
+#p_3=((length(ex)^2 * (length(ex) + 1)^2) / (4 * (length(ex) - 1)))
+#p_4=mean(ex)^2 - sum(ex^2) / length(ex)
+#p_1*p_2+p_3*p_4
+
+x=c(3,4,4,1,5,5,2,3,4)
+tws=sum(x * 1:length(x))
+e=length(x) * (length(x) + 1) / 2 * mean(x)
+p_1=((length(x) * (length(x) +1) * (2 * length(x) + 1)) / (6 * (length(x) - 1)))
+p_2=sum(x^2) - (length(x) * mean(x)^2)
+p_3=((length(x)^2 * (length(x) + 1)^2) / (4 * (length(x) - 1)))
+p_4=mean(x)^2 - sum(x^2) / length(x)
+var=p_1*p_2+p_3*p_4
+
+ts=(tws - e) / sqrt(var)
+pnorm(ts, lower.tail=FALSE)
+pnorm(156, 155, sqrt(106.667), lower.tail=FALSE)
+```
+```{r}
+2*pnorm(136.5, 150, sqrt(300))
+```
 
