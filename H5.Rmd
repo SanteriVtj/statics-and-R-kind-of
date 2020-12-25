@@ -40,6 +40,6 @@ pchisq(sum(ts_s), 4, lower.tail=FALSE)
 ```{r}
 s=c(167,165,167,166,167,168)
 ts=sum(((1/6*1000) - s)^2 / s)
-pchisq(ts, 5, lower.tail=FALSE)
+pchisq(ts, 5, lower.tail=TRUE)
 ```
 
